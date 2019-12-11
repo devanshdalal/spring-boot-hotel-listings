@@ -1,1 +1,3 @@
 rootProject.name = 'listings'
+include 'hotel.model'
+include 'hotel.controller'
