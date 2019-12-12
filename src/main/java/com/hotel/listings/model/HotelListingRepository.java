@@ -7,7 +7,7 @@ import org.springframework.data.repository.PagingAndSortingRepository;
 
 public interface HotelListingRepository extends PagingAndSortingRepository<HotelListing, String> {
 
-//    List<HotelListing> findByNeighbourhood(String neighbourhood, Pageable pageable);
+    List<HotelListing> findByNameRegex(String name, Pageable pageable);
     List<HotelListing> findByNeighbourhoodAndNameRegex(
             String neighbourhood,
             String nameRegexp,
