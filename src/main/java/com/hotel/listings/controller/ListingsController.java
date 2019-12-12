@@ -1,7 +1,5 @@
 package com.hotel.listings.controller;
 
-import java.util.List;
-
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
@@ -27,7 +25,7 @@ public class ListingsController {
     }
 
     @RequestMapping(value = "/list", method = RequestMethod.GET)
-    public List<HotelListing> list(
+    public Page<HotelListing> list(
             @RequestParam(name="name", defaultValue="") String name,
             @RequestParam(name="start", defaultValue="0") int pageIndex,
             @RequestParam(name="limit", defaultValue="20") int pageSize,
@@ -46,16 +44,9 @@ public class ListingsController {
             pageable = PageRequest.of(pageIndex, pageSize,
                     Sort.by(Sort.Direction.fromString(order[1]), order[0]));
         }
-        Page<HotelListing> page = null;
-        if (name.isEmpty() && region.isEmpty()) {
-            page = repository.findAll(pageable);
-            System.out.println("page.getTotalElements() " + page.getTotalElements());
-            return page.getContent();
-        } else {
-            return region.isEmpty() ?
-                    repository.findByNameRegex(name, pageable):
-                    repository.findByNeighbourhoodAndNameRegex(region, name,
-                    pageable);
-        }
+        return region.isEmpty() ?
+                repository.findByNameRegex(name, pageable):
+                repository.findByNeighbourhoodAndNameRegex(region, name,
+                        pageable);
     }
 }
