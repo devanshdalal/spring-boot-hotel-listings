@@ -1,6 +1,5 @@
 package com.hotel.listings.model;
 
-//import org.springframework.data.annotation.Id;
 import org.springframework.data.mongodb.core.mapping.Document;
 
 // name,host_name,neighbourhood_group,neighbourhood,
